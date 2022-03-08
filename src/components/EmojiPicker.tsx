@@ -13,19 +13,21 @@ export default function EmojiPicker(): JSX.Element {
     rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
   };
 
+  const appendCurrentEmoji = (storedEmojiArray: string[]) => [...storedEmojiArray, emojiValueFromCurrentRender]
+
   const handleChangetoCook = () => {
     queueRerenderWithNewEmojiValues(["🍳", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
+    rerenderStoredEmojiArray(appendCurrentEmoji)
   };
 
   const handleChangetoBeans = () => {
     queueRerenderWithNewEmojiValues(["🌯", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
+    rerenderStoredEmojiArray(appendCurrentEmoji)
   };
 
   const handleChangetoMonkey = () => {
     queueRerenderWithNewEmojiValues(["🐒", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
+    rerenderStoredEmojiArray(appendCurrentEmoji)
   };
 
  

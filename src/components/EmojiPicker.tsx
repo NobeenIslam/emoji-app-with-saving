@@ -8,18 +8,15 @@ export default function EmojiPicker(): JSX.Element {
 
   const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
 
-  const handleChangetoSmiley = () => {
-    queueRerenderWithNewEmojiValues(["😀", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray([
-      ...storedEmojiArray,
-      emojiValueFromCurrentRender,
-    ]);
-  };
-
   const appendCurrentEmoji = (storedEmojiArray: string[]) => [
     ...storedEmojiArray,
     emojiValueFromCurrentRender,
   ];
+
+  const handleChangetoSmiley = () => {
+    queueRerenderWithNewEmojiValues(["😀", emojiValueFromCurrentRender]);
+    rerenderStoredEmojiArray(appendCurrentEmoji);
+  };
 
   const handleChangetoCook = () => {
     queueRerenderWithNewEmojiValues(["🍳", emojiValueFromCurrentRender]);
@@ -44,7 +41,7 @@ export default function EmojiPicker(): JSX.Element {
       <h1>Emoji picker</h1>
       <p>Emoji: {emojiValueFromCurrentRender}</p>
       <p>Your previous emoji: {previousEmoji}</p>
-      <p>Stored Emojis:</p>
+      <p>Stored Emojis: {storedEmojiArray}</p>
       <ol>
         <ListElement emoji = "kang"/>
         <ListElement emoji = "shamng"/>

@@ -1,6 +1,10 @@
 import { useState } from "react";
+import emojiAsList from "./emojiAsList";
 
-export default function EmojiPicker(): JSX.Element {
+
+
+
+function EmojiPicker(): JSX.Element {
   const [
     [emojiValueFromCurrentRender, previousEmoji],
     queueRerenderWithNewEmojiValues,
@@ -8,10 +12,12 @@ export default function EmojiPicker(): JSX.Element {
 
   const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
 
-  const appendCurrentEmoji = (storedEmojiArray: string[]) => [
+  const appendCurrentEmoji = (storedEmojiArray: string[]):string[] => [
     ...storedEmojiArray,
     emojiValueFromCurrentRender,
   ];
+  ///Note remember that this storedEmojiArray is function scoped the one we want
+  //is passed in to the arrow function
 
   const handleChangetoSmiley = () => {
     queueRerenderWithNewEmojiValues(["😀", emojiValueFromCurrentRender]);
@@ -33,6 +39,8 @@ export default function EmojiPicker(): JSX.Element {
     rerenderStoredEmojiArray(appendCurrentEmoji);
   };
 
+  const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList)
+  //Create our array of JSX Components which have the HTML emoji format
 
   console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
 
@@ -43,8 +51,7 @@ export default function EmojiPicker(): JSX.Element {
       <p>Your previous emoji: {previousEmoji}</p>
       <p>Stored Emojis: {storedEmojiArray}</p>
       <ol>
-        <ListElement emoji = "kang"/>
-        <ListElement emoji = "shamng"/>
+        {listOfEmojis}
       </ol>
 
 
@@ -57,16 +64,8 @@ export default function EmojiPicker(): JSX.Element {
   );
 }
 
-interface emojiProp {
-  emoji: string;
-}
+export default EmojiPicker
 
-function ListElement(props: emojiProp): JSX.Element {
-  return (
-      <li>{props.emoji}</li>
-  );
-}
 
-/*for each element in stored Emoji Array
-    wack it into the list component
-*/
+
+

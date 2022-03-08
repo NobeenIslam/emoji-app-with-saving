@@ -36,6 +36,7 @@ export default function EmojiPicker(): JSX.Element {
     rerenderStoredEmojiArray(appendCurrentEmoji);
   };
 
+
   console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
 
   return (
@@ -43,7 +44,12 @@ export default function EmojiPicker(): JSX.Element {
       <h1>Emoji picker</h1>
       <p>Emoji: {emojiValueFromCurrentRender}</p>
       <p>Your previous emoji: {previousEmoji}</p>
-      <p>Stored Emojis: {storedEmojiArray}</p>
+      <p>Stored Emojis:</p>
+      <ol>
+        <ListElement emoji = "kang"/>
+        <ListElement emoji = "shamng"/>
+      </ol>
+
 
       <button onClick={handleChangetoSmiley}>😀</button>
       <button onClick={handleChangetoCook}>🍳</button>
@@ -60,9 +66,7 @@ interface emojiProp {
 
 function ListElement(props: emojiProp): JSX.Element {
   return (
-    <>
-      <ol>{props.emoji}</ol>
-    </>
+      <li>{props.emoji}</li>
   );
 }
 

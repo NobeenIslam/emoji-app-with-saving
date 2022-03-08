@@ -10,23 +10,25 @@ export default function EmojiPicker(): JSX.Element {
 
   const handleChangetoSmiley = () => {
     queueRerenderWithNewEmojiValues(["😀", emojiValueFromCurrentRender]);
+    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
   };
 
   const handleChangetoCook = () => {
     queueRerenderWithNewEmojiValues(["🍳", emojiValueFromCurrentRender]);
+    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
   };
 
   const handleChangetoBeans = () => {
     queueRerenderWithNewEmojiValues(["🌯", emojiValueFromCurrentRender]);
+    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
   };
 
   const handleChangetoMonkey = () => {
     queueRerenderWithNewEmojiValues(["🐒", emojiValueFromCurrentRender]);
+    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
   };
 
-  const handleStoreEmojis = () => {
-    rerenderStoredEmojiArray([...storedEmojiArray,emojiValueFromCurrentRender])
-  }
+ 
 
   console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
 
@@ -41,7 +43,7 @@ export default function EmojiPicker(): JSX.Element {
       <button onClick={handleChangetoBeans}>🌯</button>
       <button onClick={handleChangetoMonkey}>🐒</button>
       <hr />
-      <button onClick = {handleStoreEmojis}>Store Emojis</button>
+
     </>
   );
 }

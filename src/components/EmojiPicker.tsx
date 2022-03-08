@@ -1,35 +1,39 @@
 import { useState } from "react";
 
-export default function NumberPicker(): JSX.Element {
-  const [counterValueFromCurrentRender, queueRerenderWithNewCounterValue] =
-    useState(0);
-  const [favouriteValueFromCurrentRender, queueRerenderWithNewFavouriteValue] =
-    useState(0);
+export default function EmojiPicker(): JSX.Element {
+  const [[emojiValueFromCurrentRender,previousEmoji], queueRerenderWithNewEmojiValues] =
+    useState(["🍳",""]);
 
-  const handleAddOneToCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender + 1);
+
+  const handleChangetoSmiley = () => {
+    queueRerenderWithNewEmojiValues(["😀",emojiValueFromCurrentRender]);
   };
 
-  const handleSubtractOneFromCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender - 1);
+  const handleChangetoCook= () => {
+    queueRerenderWithNewEmojiValues(["🍳",emojiValueFromCurrentRender]);
   };
 
-  const handleStoreCurrentCount = () => {
-    queueRerenderWithNewFavouriteValue(counterValueFromCurrentRender);
-    //Until this button is pressed favouriteValueFromCurrentRender is 0)
+  const handleChangetoBeans= () => {
+    queueRerenderWithNewEmojiValues(["🌯",emojiValueFromCurrentRender]);
   };
 
-  console.log(counterValueFromCurrentRender,favouriteValueFromCurrentRender);
+  const handleChangetoMonkey= () => {
+    queueRerenderWithNewEmojiValues(["🐒",emojiValueFromCurrentRender]);
+  };
+
+
+  console.log(emojiValueFromCurrentRender,previousEmoji);
 
   return (
     <>
-      <h1>Number picker</h1>
-      <p>Your stored number: {favouriteValueFromCurrentRender}</p>
-      <p>Counter: {counterValueFromCurrentRender}</p>
-      <button onClick={handleSubtractOneFromCounter}>-1</button>
-      <button onClick={handleAddOneToCounter}>+1</button>
+      <h1>Emoji picker</h1>
+      <p>Your previous emoji: {emojiValueFromCurrentRender}</p>
+      <p>Counter: {previousEmoji}</p>
+      <button onClick={handleChangetoSmiley}>😀</button>
+      <button onClick={handleChangetoCook}>🍳</button>
+      <button onClick={handleChangetoBeans}>🌯</button>
+      <button onClick={handleChangetoMonkey}>🐒</button>
       <hr />
-      <button onClick={handleStoreCurrentCount}>Store current count</button>
     </>
   );
 }

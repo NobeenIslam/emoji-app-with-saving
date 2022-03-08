@@ -1,5 +1,5 @@
 interface emojiProp {
-    emoji: string;
-  }
+  emoji: string;
+}
 
-export default emojiProp
+export default emojiProp;

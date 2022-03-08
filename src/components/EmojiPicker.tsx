@@ -1,9 +1,6 @@
 import { useState } from "react";
 import emojiAsList from "./emojiAsList";
 
-
-
-
 function EmojiPicker(): JSX.Element {
   const [
     [emojiValueFromCurrentRender, previousEmoji],
@@ -12,7 +9,7 @@ function EmojiPicker(): JSX.Element {
 
   const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
 
-  const appendCurrentEmoji = (storedEmojiArray: string[]):string[] => [
+  const appendCurrentEmoji = (storedEmojiArray: string[]): string[] => [
     ...storedEmojiArray,
     emojiValueFromCurrentRender,
   ];
@@ -39,7 +36,7 @@ function EmojiPicker(): JSX.Element {
     rerenderStoredEmojiArray(appendCurrentEmoji);
   };
 
-  const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList)
+  const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList);
   //Create our array of JSX Components which have the HTML emoji format
 
   console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
@@ -50,10 +47,7 @@ function EmojiPicker(): JSX.Element {
       <p>Emoji: {emojiValueFromCurrentRender}</p>
       <p>Your previous emoji: {previousEmoji}</p>
       <p>Stored Emojis: {storedEmojiArray}</p>
-      <ol>
-        {listOfEmojis}
-      </ol>
-
+      <ol>{listOfEmojis}</ol>
 
       <button onClick={handleChangetoSmiley}>😀</button>
       <button onClick={handleChangetoCook}>🍳</button>
@@ -64,8 +58,4 @@ function EmojiPicker(): JSX.Element {
   );
 }
 
-export default EmojiPicker
-
-
-
-
+export default EmojiPicker;

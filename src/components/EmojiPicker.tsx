@@ -16,7 +16,10 @@ export default function NumberPicker(): JSX.Element {
 
   const handleStoreCurrentCount = () => {
     queueRerenderWithNewFavouriteValue(counterValueFromCurrentRender);
+    //Until this button is pressed favouriteValueFromCurrentRender is 0)
   };
+
+  console.log(counterValueFromCurrentRender,favouriteValueFromCurrentRender);
 
   return (
     <>

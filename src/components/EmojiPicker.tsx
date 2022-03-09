@@ -1,7 +1,6 @@
 import { useState } from "react";
 import emojiAsList from "./emojiAsList";
 
-
 function EmojiPicker(): JSX.Element {
   const [
     [emojiValueFromCurrentRender, previousEmoji],
@@ -40,7 +39,7 @@ function EmojiPicker(): JSX.Element {
   const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList);
   //Create our array of JSX Components which have the HTML emoji format
 
-  const mostRecentEmojiList = listOfEmojis.reverse().slice(0,5)
+  const mostRecentEmojiList = listOfEmojis.reverse().slice(0, 5);
 
   console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
 

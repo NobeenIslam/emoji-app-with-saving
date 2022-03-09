@@ -4,9 +4,6 @@ import emojiAsList from "./emojiAsList";
 function EmojiPicker(): JSX.Element {
   const [[currentEmoji, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
 
-  //const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
-
-  //const appendCurrentEmoji = (storedEmojiArray: string[],currentEmoji:string): string[] => [...storedEmojiArray,currentEmoji];
   ///Note remember that this storedEmojiArray is function scoped the one we want
   //is passed in to the arrow function
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import emojiAsList from "./emojiAsList";
 
 function EmojiPicker(): JSX.Element {
-  const [[emojiValueFromCurrentRender, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
+  const [[currentEmoji, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
 
   //const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
 
@@ -11,23 +11,23 @@ function EmojiPicker(): JSX.Element {
   //is passed in to the arrow function
 
   const handleChangetoSmiley = () => {
-    storedEmojiArray.push(emojiValueFromCurrentRender)
-    queueRenderer(["😀", emojiValueFromCurrentRender, storedEmojiArray]);
+    storedEmojiArray.push(currentEmoji)
+    queueRenderer(["😀", currentEmoji, storedEmojiArray]);
   };
 
   const handleChangetoCook = () => {
-    storedEmojiArray.push(emojiValueFromCurrentRender)
-    queueRenderer(["🍳", emojiValueFromCurrentRender, storedEmojiArray]);
+    storedEmojiArray.push(currentEmoji)
+    queueRenderer(["🍳", currentEmoji, storedEmojiArray]);
   };
 
   const handleChangetoBeans = () => {
-    storedEmojiArray.push(emojiValueFromCurrentRender)
-    queueRenderer(["🌯", emojiValueFromCurrentRender,storedEmojiArray]);
+    storedEmojiArray.push(currentEmoji)
+    queueRenderer(["🌯", currentEmoji,storedEmojiArray]);
   };
 
   const handleChangetoMonkey = () => {
-    storedEmojiArray.push(emojiValueFromCurrentRender)
-    queueRenderer(["🐒", emojiValueFromCurrentRender,storedEmojiArray]);
+    storedEmojiArray.push(currentEmoji)
+    queueRenderer(["🐒", currentEmoji,storedEmojiArray]);
   };
 
   const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList);
@@ -35,12 +35,12 @@ function EmojiPicker(): JSX.Element {
 
   const mostRecentEmojiList = listOfEmojis.reverse().slice(0, 5);
 
-  console.log(emojiValueFromCurrentRender, storedEmojiArray);
+  console.log(currentEmoji, storedEmojiArray);
 
   return (
     <>
       <h1>Emoji picker</h1>
-      <p>Emoji: {emojiValueFromCurrentRender}</p>
+      <p>Emoji: {currentEmoji}</p>
       <p>Your previous emoji: {previousEmoji}</p>
       <p>Stored Emojis: {storedEmojiArray}</p>
       <ol>{mostRecentEmojiList}</ol>

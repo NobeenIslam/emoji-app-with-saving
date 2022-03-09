@@ -2,32 +2,32 @@ import { useState } from "react";
 import emojiAsList from "./emojiAsList";
 
 function EmojiPicker(): JSX.Element {
-  const [[emojiValueFromCurrentRender, previousEmoji],queueRenderer] = useState(["🍳", ""]);
+  const [[emojiValueFromCurrentRender, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
 
-  const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
+  //const [storedEmojiArray, rerenderStoredEmojiArray] = useState<string[]>([]);
 
-  const appendCurrentEmoji = (storedEmojiArray: string[]): string[] => [...storedEmojiArray,emojiValueFromCurrentRender];
+  //const appendCurrentEmoji = (storedEmojiArray: string[],currentEmoji:string): string[] => [...storedEmojiArray,currentEmoji];
   ///Note remember that this storedEmojiArray is function scoped the one we want
   //is passed in to the arrow function
 
   const handleChangetoSmiley = () => {
-    queueRenderer(["😀", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray(appendCurrentEmoji);
+    storedEmojiArray.push(emojiValueFromCurrentRender)
+    queueRenderer(["😀", emojiValueFromCurrentRender, storedEmojiArray]);
   };
 
   const handleChangetoCook = () => {
-    queueRenderer(["🍳", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray(appendCurrentEmoji);
+    storedEmojiArray.push(emojiValueFromCurrentRender)
+    queueRenderer(["🍳", emojiValueFromCurrentRender, storedEmojiArray]);
   };
 
   const handleChangetoBeans = () => {
-    queueRenderer(["🌯", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray(appendCurrentEmoji);
+    storedEmojiArray.push(emojiValueFromCurrentRender)
+    queueRenderer(["🌯", emojiValueFromCurrentRender,storedEmojiArray]);
   };
 
   const handleChangetoMonkey = () => {
-    queueRenderer(["🐒", emojiValueFromCurrentRender]);
-    rerenderStoredEmojiArray(appendCurrentEmoji);
+    storedEmojiArray.push(emojiValueFromCurrentRender)
+    queueRenderer(["🐒", emojiValueFromCurrentRender,storedEmojiArray]);
   };
 
   const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList);
@@ -35,7 +35,7 @@ function EmojiPicker(): JSX.Element {
 
   const mostRecentEmojiList = listOfEmojis.reverse().slice(0, 5);
 
-  console.log(emojiValueFromCurrentRender, previousEmoji, storedEmojiArray);
+  console.log(emojiValueFromCurrentRender, storedEmojiArray);
 
   return (
     <>
@@ -54,3 +54,21 @@ function EmojiPicker(): JSX.Element {
 }
 
 export default EmojiPicker;
+
+
+  /*
+state 0 
+Render CURRENT_EMOJI with cook
+Render PREVIOUS_EMOJI as empty
+Render EMOJI_HISTORY as empy array
+
+state 1 queuing
+Render CURRENT_EMOJI with happy via button press
+Render PREVIOUS_EMOJI as with STATE0:CURRENT_EMOJI
+Render EMOJI_HISTORY with STATE1:CURRENT_EMOJI Appended
+
+state 2
+Render CURRENT_EMOJI with beans via button press
+Render PREVIOUS_EMOJI as with STATE1:CURRENT_EMOJI
+Render EMOJI_HISTORY with STATE1:CURRENT_EMOJI Appended
+*/

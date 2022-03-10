@@ -3,13 +3,16 @@ import emojiAsList from "./emojiAsList";
 
 function EmojiPicker(): JSX.Element {
   const [[currentEmoji, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
-
+  
   ///Note remember that this storedEmojiArray is function scoped the one we want
   //is passed in to the arrow function
 
   const handleChangetoSmiley = () => {
-    storedEmojiArray.push(currentEmoji)
-    queueRenderer(["😀", currentEmoji, storedEmojiArray]);
+    storedEmojiArray.push(currentEmoji) //--> Why did this work
+    queueRenderer(["😀", currentEmoji, storedEmojiArray])
+    //queueRenderer(["😀", currentEmoji, [...storedEmojiArray,currentEmoji]])
+    //queueRenderer(["😀", currentEmoji, storedEmojiArray.push(currentEmoji)]) --> Why didn't this work
+    //queueRenderer(["😀", currentEmoji, ["beans"]]);
   };
 
   const handleChangetoCook = () => {
@@ -32,7 +35,7 @@ function EmojiPicker(): JSX.Element {
 
   const mostRecentEmojiList = listOfEmojis.reverse().slice(0, 5);
 
-  console.log(currentEmoji, storedEmojiArray);
+  console.log("Current render", storedEmojiArray);
 
   return (
     <>
@@ -62,7 +65,7 @@ Render EMOJI_HISTORY as empy array
 state 1 queuing
 Render CURRENT_EMOJI with happy via button press
 Render PREVIOUS_EMOJI as with STATE0:CURRENT_EMOJI
-Render EMOJI_HISTORY with STATE1:CURRENT_EMOJI Appended
+Render EMOJI_HISTORY with STATE0:CURRENT_EMOJI Appended
 
 state 2
 Render CURRENT_EMOJI with beans via button press

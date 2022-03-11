@@ -2,47 +2,39 @@ import { useState } from "react";
 import emojiAsList from "./emojiAsList";
 
 function EmojiPicker(): JSX.Element {
-  const [[currentEmoji, previousEmoji,storedEmojiArray],queueRenderer] = useState<[string,string,string[]]>(["🍳", "",[]]);
-  
+  const [emojiHistory,queueRenderer] = useState<string[]>(["🍳"]);
+  const currentEmoji = emojiHistory[0];
+
   ///Note remember that this storedEmojiArray is function scoped the one we want
   //is passed in to the arrow function
 
   const handleChangetoSmiley = () => {
-    storedEmojiArray.push(currentEmoji) //--> Why did this work
-    queueRenderer(["😀", currentEmoji, storedEmojiArray])
-    //queueRenderer(["😀", currentEmoji, [...storedEmojiArray,currentEmoji]])
-    //queueRenderer(["😀", currentEmoji, storedEmojiArray.push(currentEmoji)]) --> Why didn't this work
-    //queueRenderer(["😀", currentEmoji, ["beans"]]);
+    queueRenderer(["😀", ...emojiHistory])
   };
 
   const handleChangetoCook = () => {
-    storedEmojiArray.push(currentEmoji)
-    queueRenderer(["🍳", currentEmoji, storedEmojiArray]);
+    queueRenderer(["🍳", ...emojiHistory]);
   };
 
   const handleChangetoBeans = () => {
-    storedEmojiArray.push(currentEmoji)
-    queueRenderer(["🌯", currentEmoji,storedEmojiArray]);
+    queueRenderer(["🌯", ...emojiHistory]);
   };
 
   const handleChangetoMonkey = () => {
-    storedEmojiArray.push(currentEmoji)
-    queueRenderer(["🐒", currentEmoji,storedEmojiArray]);
+    queueRenderer(["🐒", ...emojiHistory]);
   };
 
-  const listOfEmojis: JSX.Element[] = storedEmojiArray.map(emojiAsList);
+  const listOfEmojis: JSX.Element[] = emojiHistory.map(emojiAsList);
   //Create our array of JSX Components which have the HTML emoji format
 
-  const mostRecentEmojiList = listOfEmojis.reverse().slice(0, 5);
+  const mostRecentEmojiList = listOfEmojis.slice(0, 5);
 
-  console.log("Current render", storedEmojiArray);
+  console.log("Current render", emojiHistory);
 
   return (
     <>
       <h1>Emoji picker</h1>
       <p>Emoji: {currentEmoji}</p>
-      <p>Your previous emoji: {previousEmoji}</p>
-      <p>Stored Emojis: {storedEmojiArray}</p>
       <ol>{mostRecentEmojiList}</ol>
       <button onClick={handleChangetoSmiley}>😀</button>
       <button onClick={handleChangetoCook}>🍳</button>
@@ -56,19 +48,16 @@ function EmojiPicker(): JSX.Element {
 export default EmojiPicker;
 
 
-  /*
+/*
 state 0 
-Render CURRENT_EMOJI with cook
-Render PREVIOUS_EMOJI as empty
-Render EMOJI_HISTORY as empy array
+Render Emoji History as array with Cook in it
+Declare CURRENT_EMOJI with cook;s first array
+Declare PREVIOUS_EMOJI as empty
+
 
 state 1 queuing
-Render CURRENT_EMOJI with happy via button press
-Render PREVIOUS_EMOJI as with STATE0:CURRENT_EMOJI
-Render EMOJI_HISTORY with STATE0:CURRENT_EMOJI Appended
+Render Emoji History with happy appended
+Render CURRENT_EMOJI with 2nd element of emoji history
+Render PREVIOUS_EMOJI with first element of emoji history
 
-state 2
-Render CURRENT_EMOJI with beans via button press
-Render PREVIOUS_EMOJI as with STATE1:CURRENT_EMOJI
-Render EMOJI_HISTORY with STATE1:CURRENT_EMOJI Appended
 */
